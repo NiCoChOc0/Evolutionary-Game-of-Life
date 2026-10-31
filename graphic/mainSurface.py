@@ -15,10 +15,15 @@ class MainSurface:
 
     def __init__(self):
         pygame.init()
-        pygame.mixer.init()
-        pygame.mixer.music.load(music_path + "2-15. Crossing the Iron Bridge.flac")
-        pygame.mixer.music.play(-1,0.0)
-        pygame.mixer.music.set_volume( 0.05)
+        try:
+            pygame.mixer.init()
+            pygame.mixer.music.load(music_path + "2-15. Crossing the Iron Bridge.flac")
+            pygame.mixer.music.play(-1,0.0)
+            pygame.mixer.music.set_volume( 0.05)
+        except pygame.error:
+            # Fix for WSL
+            print("Warning: No audio device available. Audio disabled.")
+        
         self.current_day =0
 
         # Création de la fenêtre
